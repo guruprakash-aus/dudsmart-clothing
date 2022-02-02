@@ -3,30 +3,46 @@ import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import Header from "./components/Header/Header";
+import { auth } from "./firebase/utils";
+import Authentication from "./pages/Authentication/Authentication";
 import HomePage from "./pages/homepage/HomePage";
 import ShopPage from "./pages/shop/ShopPage";
 
+class App extends React.Component {
+  constructor() {
+    super();
 
-// const HatsPage = () => {
-//   const location = useLocation();
-//   console.log(location)
-//   return (
-//     <div>
-//       <h1>Hats Page</h1>
-//     </div>
-//   );
-// };
+    this.state = {
+      currentUser: null,
+    };
+  }
 
-function App() {
-  return (
-    <div>
-      <Header/>
-      <Routes>
-        <Route exact path='/' element={<HomePage />} />
-        <Route path='/shop' element={<ShopPage />} />
-      </Routes>
-    </div>
-  );
+  unSubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unSubscribeFromAuth = auth.onAuthStateChanged((user) => {
+      this.setState({ currentUser: user });
+
+      console.log(user);
+    });
+  }
+
+  componentWillUnmount() {
+    this.unSubscribeFromAuth();
+  }
+
+  render() {
+    return (
+      <div>
+        <Header currentUser={this.state.currentUser}/>
+        <Routes>
+          <Route exact path='/' element={<HomePage />} />
+          <Route path='/shop' element={<ShopPage />} />
+          <Route path='/authentication' element={<Authentication />} />
+        </Routes>
+      </div>
+    );
+  }
 }
 
 export default App;
