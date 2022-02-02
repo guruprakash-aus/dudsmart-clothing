@@ -25,7 +25,6 @@ class App extends React.Component {
 
       //   console.log(user);
       // });
-      console.log(userAuth);
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
@@ -36,8 +35,6 @@ class App extends React.Component {
               ...snapShot.data(),
             },
           });
-
-          console.log(this.state);
         });
       } else {
         this.setState({ currentUser: userAuth });
