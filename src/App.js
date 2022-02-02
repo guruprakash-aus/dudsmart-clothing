@@ -2,8 +2,10 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
+import Header from "./components/Header/Header";
 import HomePage from "./pages/homepage/HomePage";
 import ShopPage from "./pages/shop/ShopPage";
+
 
 // const HatsPage = () => {
 //   const location = useLocation();
@@ -18,6 +20,7 @@ import ShopPage from "./pages/shop/ShopPage";
 function App() {
   return (
     <div>
+      <Header/>
       <Routes>
         <Route exact path='/' element={<HomePage />} />
         <Route path='/shop' element={<ShopPage />} />
