@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import "./App.css";
 import Header from "./components/Header/Header";
@@ -9,7 +10,8 @@ import Authentication from "./pages/Authentication/Authentication";
 import HomePage from "./pages/homepage/HomePage";
 import ShopPage from "./pages/shop/ShopPage";
 import { setCurrentUser } from "./redux/user/userAction";
-// import { setCurrentUser } from "./redux/user/userAction";
+import { selectCurrentUser } from "./redux/user/userSelector";
+import CheckoutPage from "./pages/checkout/CheckoutPage";
 
 class App extends React.Component {
 
@@ -48,6 +50,7 @@ class App extends React.Component {
           <Route exact path='/' element={<HomePage />} />
           <Route path='/shop' element={<ShopPage />} />
           <Route exact path='/authentication' element={ProtectedRoutes(this.props.currentUser)} />
+          <Route exact path='/checkout' element={<CheckoutPage />} />
         </Routes>
       </div>
     );
@@ -59,8 +62,12 @@ const ProtectedRoutes = (currentUser) => {
     currentUser ? <Navigate to="/" /> : <Authentication />
   );
 }
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+// const mapStateToProps = (state) => ({
+//   currentUser: state.user.currentUser,
+// });
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
