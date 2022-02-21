@@ -1,28 +1,31 @@
-import React from 'react';
-import {useNavigate} from 'react-router-dom'
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import './MenuItem.styles.scss';
+import {
+  MenuItemContainer,
+  BackgroundImageContainer,
+  ContentContainer,
+  ContentTitle,
+  ContentSubtitle,
+} from "./MenuItem.styles";
 
 const MenuItem = ({ title, imageUrl, size, linkUrl }) => {
   const navigate = useNavigate();
-  console.log(linkUrl)
+  console.log(linkUrl);
   function handleClick() {
-    navigate(`${linkUrl}`)
-  } 
+    navigate(`${linkUrl}`);
+  }
 
   return (
-  <div className={`${size} menu-item`} onClick={handleClick}>
-    <div
-      className='background-image'
-      style={{
-        backgroundImage: `url(${imageUrl})`
-      }}
-    />
-    <div className='content'>
-      <h1 className='title'>{title.toUpperCase()}</h1>
-      <span className='subtitle'>SHOP NOW</span>
-    </div>
-  </div>
-) };
+    <MenuItemContainer size={size} onClick={handleClick}>
+      <BackgroundImageContainer imageUrl={imageUrl} />
+
+      <ContentContainer>
+        <ContentTitle>{title.toUpperCase()}</ContentTitle>
+        <ContentSubtitle>SHOP NOW</ContentSubtitle>
+      </ContentContainer>
+    </MenuItemContainer>
+  );
+};
 
 export default MenuItem;

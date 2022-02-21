@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { auth, signInWithGoogle } from "../../../firebase/utils";
 import CustomButton from "../../CustomButton/CustomButton";
 import FormInput from "../../FormInput/FormInput";
-import "./SignIn.styles.scss";
-
+import {
+  ButtonsBarContainer,
+  SignInContainer,
+  SignInTitle,
+} from "./SignIn.styles";
 export class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +23,7 @@ export class SignIn extends Component {
 
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: '', password: '' });
+      this.setState({ email: "", password: "" });
     } catch (error) {
       console.log(error);
     }
@@ -34,8 +37,8 @@ export class SignIn extends Component {
 
   render() {
     return (
-      <div className='sign-in'>
-        <h2>I already have an account</h2>
+      <SignInContainer>
+        <SignInTitle>I already have an account</SignInTitle>
         <span>Sign in with your email and password</span>
 
         <form onSubmit={this.handleSubmit}>
@@ -56,14 +59,14 @@ export class SignIn extends Component {
             label='Password'
             required
           />
-          <div className='buttons'>
+          <ButtonsBarContainer>
             <CustomButton type='submit'>Submit Form</CustomButton>
             <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
               SIGNIN WITH GOOGLE
             </CustomButton>
-          </div>
+          </ButtonsBarContainer>
         </form>
-      </div>
+      </SignInContainer>
     );
   }
 }

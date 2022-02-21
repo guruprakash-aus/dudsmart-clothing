@@ -7,6 +7,7 @@ import rootReducer from "./rootReducer";
 
 const middlewares = [];
 
+// to display the redux logs in the console for debugging
 if (process.env.NODE_ENV === 'development') {
     middlewares.push(logger);
 }
