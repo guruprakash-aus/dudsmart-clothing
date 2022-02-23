@@ -1,12 +1,24 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import { connect } from "react-redux";
 
-const ShopLayout = () => {
+import { fetchCollectionsStartAsync } from "../../redux/shop/shopActions";
+
+const ShopLayout = ({ fetchCollectionsStartAsync }) => {
+  useEffect(() => {
+    console.log("Shoppage");
+    fetchCollectionsStartAsync();
+  }, [fetchCollectionsStartAsync]);
+
   return (
     <div>
-        <Outlet />
+      <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default ShopLayout
+const mapDispatchToProps = (dispatch) => ({
+  fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),
+});
+
+export default connect(null, mapDispatchToProps)(ShopLayout);

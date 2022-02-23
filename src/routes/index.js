@@ -3,7 +3,7 @@ import { useRoutes, Navigate } from "react-router-dom";
 import ShopLayout from "../layouts/ShopLayout/ShopLayout";
 import Authentication from "../pages/Authentication/Authentication";
 import CheckoutPage from "../pages/checkout/CheckoutPage";
-import Collectionpage from "../pages/collection/Collectionpage";
+import CollectionPageContainer from "../pages/collection/CollectionpageContainer";
 import HomePage from "../pages/homepage/HomePage";
 import ShopPage from "../pages/shop/ShopPage";
 
@@ -23,7 +23,7 @@ const AppRoutes = ({ currentUser }) => {
         },
         {
           path: ":collectionId",
-          element: <Collectionpage />,
+          element: <CollectionPageContainer />,
         },
       ],
     },

@@ -4,19 +4,19 @@ import { Outlet } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { selectCollectionsForPreview } from "../../redux/shop/shopSelector";
 import CollectionPreview from "../CollectionPreview/CollectionPreview";
-import { CollectionsOverviewContainer } from "./CollectionsOverview.styles";
+import {CollectionsOverviewStyleContainer} from "./CollectionsOverview.styles";
 
 import "./CollectionsOverview.styles.scss";
 
 const CollectionsOverview = ({ collections }) => {
   console.log(collections);
   return (
-    <CollectionsOverviewContainer>
+    <CollectionsOverviewStyleContainer>
       {collections.map(({ id, ...otherCollectionProps }) => (
         <CollectionPreview key={id} {...otherCollectionProps} />
       ))}
       <Outlet />
-    </CollectionsOverviewContainer>
+    </CollectionsOverviewStyleContainer>
   );
 };
 
