@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { auth, createUserProfileDocument } from "../../firebase/utils";
-import CustomButton from "../CustomButton/CustomButton";
-import FormInput from "../FormInput/FormInput";
+import { connect } from "react-redux";
+// import { auth, createUserProfileDocument } from "../../../firebase/utils";
+import { signUpStart } from "../../../redux/user/userAction";
+import CustomButton from "../../CustomButton/CustomButton";
+import FormInput from "../../FormInput/FormInput";
 import { SignUpContainer, SignUpTitle } from "./SignUp.styles";
 
-export default class SignUp extends Component {
+export class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +19,7 @@ export default class SignUp extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-
+    const { signUpStart } = this.props;
     const { displayName, email, password, confirmPassword } = this.state;
 
     if (password !== confirmPassword) {
@@ -25,23 +27,25 @@ export default class SignUp extends Component {
       return;
     }
 
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
+    // try {
+      // const { user } = await auth.createUserWithEmailAndPassword(
+      //   email,
+      //   password
+      // );
 
-      createUserProfileDocument(user, { displayName });
+      // createUserProfileDocument(user, { displayName });
 
-      this.setState({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    //   this.setState({
+    //     displayName: "",
+    //     email: "",
+    //     password: "",
+    //     confirmPassword: "",
+    //   });
+    // } catch (error) {
+    //   console.error(error);
+    // }
+
+    signUpStart({ displayName, email, password });
   };
 
   handleChange = (event) => {
@@ -85,7 +89,7 @@ export default class SignUp extends Component {
             name='confirmPassword'
             value={confirmPassword}
             onChange={this.handleChange}
-            label="Confirm Password"
+            label='Confirm Password'
             required
           />
           <CustomButton type='submit'>SIGN UP</CustomButton>
@@ -94,3 +98,9 @@ export default class SignUp extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  signUpStart: (userCredentials) => dispatch(signUpStart(userCredentials)),
+});
+
+export default connect(null,mapDispatchToProps)(SignUp);

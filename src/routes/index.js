@@ -41,7 +41,7 @@ const AppRoutes = ({ currentUser }) => {
 };
 
 const ProtectedRoutes = (currentUser) => {
-  return currentUser ? <Navigate to='/' /> : <Authentication />;
+  return currentUser ? <Navigate to='/shop' /> : <Authentication />;
 };
 
 export default AppRoutes;

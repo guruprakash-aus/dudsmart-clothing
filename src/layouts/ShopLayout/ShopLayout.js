@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { fetchCollectionsStartAsync } from "../../redux/shop/shopActions";
+import { fetchCollectionsStart } from "../../redux/shop/shopActions";
 
-const ShopLayout = ({ fetchCollectionsStartAsync }) => {
+const ShopLayout = ({ fetchCollectionsStart }) => {
   useEffect(() => {
     console.log("Shoppage");
-    fetchCollectionsStartAsync();
-  }, [fetchCollectionsStartAsync]);
+    fetchCollectionsStart();
+  }, [fetchCollectionsStart]);
 
   return (
     <div>
@@ -18,7 +18,7 @@ const ShopLayout = ({ fetchCollectionsStartAsync }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
 });
 
 export default connect(null, mapDispatchToProps)(ShopLayout);
