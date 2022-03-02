@@ -18,27 +18,4 @@ const ShopPage = () => {
 
 export default ShopPage;
 
-// useEffect(() => {
-//   const collectionRef = firestore.collection("collections");
 
-//   // collectionRef.onSnapshot((snapshot) => {
-//   //   const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-//   //   updateCollections(collectionsMap);
-//   //   console.log(collectionsMap)
-//   // });
-
-//   // Below is the direct fetch from Firestore DB which gives us a nested collection of documents.
-//   // fetch(
-//   //   "https://firestore.googleapis.com/v1/projects/duds-db-22734/databases/(default)/documents/collections/"
-//   // )
-//   //   .then((response) => response.json())
-//   //   .then((data) => console.log(data));
-
-//   // The below is the promise version of the code above
-//   collectionRef.get().then((snapshot) => {
-//     const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-//     updateCollections(collectionsMap);
-//     console.log(collectionsMap)
-//   });
-
-// }, [updateCollections]);
